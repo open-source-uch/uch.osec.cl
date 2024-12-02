@@ -1,41 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import Navbar from '../components/Navbar.astro';
 ---
 <br><br>
 
-<Layout title="OSUCH | Open Source Universidad de Chile">
-	<Navbar/>
+<Layout title="OSUCH | Projects">
 	<main>
-		<h1>Open Source <span class="text-gradient">UCH</span></h1>
+		<h1>Proyectos <span class="text-gradient">FCFM</span></h1>
 		<>
-		<p class="instructions">
-			Comunidad de estudiantes de <strong><a href="https://ing.uchile.cl">Beauchef</a></strong>
-			con toda la motivación de crear<br />
-			e impulsar proyectos de código abierto para la Universidad de Chile.
-		</p>
 		<ul role="list" class="link-card-grid">
 			<Card
-				href="https://github.com/open-source-uch/"
-				title="Org de GitHub"
-				body="Sitio web con el código fuente de todos nuestros proyectos."
+				href="https://github.com/open-source-uch/malla-api"
+				title="Malla API"
+				body="API estable con las mallas de las distintas ingenierías en la FCFM."
 			/>
 			<Card
-				href="https://t.me/+PLukDCY-io5hNjNh/"
-				title="Grupo de Telegram"
-				body="Conversaciones de Open Source con la comunidad de la UChile."
+				href="https://github.com/open-source-uch/printer-gui"
+				title="Printer GUI"
+				body="WebUI para imprmir en Anakena (integración oficial con Sistemas)."
 			/>
 			<Card
-				href="https://osec.cl/"
-				title="OSEC"
-				body="La organización que respalda nuestra iniciativa."
-			/>
-			<Card
-				href="https://github.com/open-source-uch/UbiCate-v2/"
-				title="UbiCate UChile!"
-				body="Fork de UbiCate para la Universidad de Chile."
-			/>
+			href="https://github.com/open-source-uch/UbiCate-v2"
+			title="UbiCate UChile!"
+			body="Fork de UbiCate para la Universidad de Chile."
+		    />
 		</ul>
 	</main>
 </Layout>
