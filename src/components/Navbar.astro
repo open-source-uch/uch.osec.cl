@@ -8,6 +8,11 @@ const links = [
 ---
 
 <nav class="navbar">
+
+  <a href="/" class="logo">
+    <img src="../logo.png" alt="Logo" class="logo-img" />
+  </a>
+  
   <ul class="nav-list">
     {links.map((link) => (
       <li class="nav-item">
@@ -15,9 +20,25 @@ const links = [
       </li>
     ))}
   </ul>
+
 </nav>
 
 <style>
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+  }
+  .logo-img {
+    height: 60px; /* Ajusta el tamaño del logo */
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    vertical-align: middle; /* Asegura que el logo esté alineado verticalmente */
+    margin-top: -8px; /* Ajusta la posición vertical del logo */
+  }
+
   .navbar {
     background-color: #1a1313;
     padding: 1rem 2rem;
@@ -38,7 +59,7 @@ const links = [
   }
   .nav-link {
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     text-decoration: none;
     opacity: 0.8;
     padding: 0.5rem 1rem;
