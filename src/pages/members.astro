@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+import { members, Member } from '../data/membersData'; // Importa los datos
+---
+
+<Layout title="OSUCH | Miembros">
+  <Navbar />
+  <main class="mx-auto mb-10 flex w-fit flex-col items-center gap-10">
+    <h1>
+      Miembros OS<span class="text-gradient">UCH</span>
+    </h1>
+
+    <section class="flex max-w-[90%] flex-col items-center gap-8 text-center lg:max-w-[70%] xl:max-w-[50%]">
+      <div class="members-container">
+        <div class="members-grid">
+          {members.map((member: Member) => (
+            <div class="member-card">
+              {member.username ? (
+                <img
+                  class="member-photo"
+                  src={`https://github.com/${member.username}.png`}
+                  alt={"Foto de " + member.name}
+                />
+              ) : (
+                <div class="default-photo">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+              )}
+
+              <h3 class="member-name">{member.name}</h3>
+              <div class="member-links">
+                <a
+                  class="member-link"
+                  href={member.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-brands fa-github"></i> <!-- Ícono de GitHub -->
+                </a>
+                {member.linkedIn && (
+                  <a
+                    class="member-link"
+                    href={member.linkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="fa-brands fa-linkedin-in"></i> <!-- Ícono de LinkedIn -->
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+    main {
+        margin: auto;
+        padding: 1rem;
+        max-width: 800px;
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 3rem; 
+    }
+
+    h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 0;    /* Eliminar espacio extra entre titular y miembros*/
+    }
+
+    .members-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .members-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 800px;
+    }
+
+    .member-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgba(29, 78, 216, 0.1);
+        border: 1px solid rgb(223, 65, 64);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        text-align: center;
+        height: 300px;
+        width: 200px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .member-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgb(223, 65, 64);
+    }
+
+    .member-photo,
+    .default-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        object-fit: cover;
+        border: 2px solid rgba(29, 78, 216, 0.1);
+    }
+
+    .default-photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px; /* Coincide con el tamaño de las fotos */
+        height: 100px; /* Igual al ancho */
+        border-radius: 50%; /* Hace el contenedor circular */
+        background-color: rgba(29, 78, 216, 0.1);
+        color: white;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        border: 2px solid rgba(29, 78, 216, 0.1); /* Borde decorativo */
+    }
+
+    .member-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: white;
+    }
+
+    .member-links {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .member-link {
+        font-size: 1rem;
+        color: rgb(223, 65, 64);
+        text-decoration: none;
+        border-bottom: 1px dashed rgb(223, 65, 64);
+        transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .member-link:hover {
+        color: white;
+        border-color: white;
+    }
+
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
