@@ -4,6 +4,9 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
 <!doctype html>
@@ -15,9 +18,12 @@ const { title } = Astro.props;
 		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		
 	</head>
 	<body>
+		<Navbar /> <!-- Aplicar Navbar -->
 		<slot />
+		<Footer /> <!-- Aplicar Footer -->
 	</body>
 </html>
 
