@@ -6,77 +6,139 @@ import Footer from '../components/Footer.astro';
 import { members } from '../data/membersData';
 import type { Member } from '../data/membersData'; 
 ---
-
 <Layout title="OSUCH | Miembros">
   <Navbar />
-  <main class="mx-auto mb-10 flex w-fit flex-col items-center gap-10">
+  <div class="main-container">
     <h1>
       Miembros OS<span class="text-gradient">UCH</span>
     </h1>
 
-    <section class="flex max-w-[90%] flex-col items-center gap-8 text-center lg:max-w-[70%] xl:max-w-[50%]">
-      <div class="members-container">
-        <div class="members-grid">
-          {members.map((member: Member) => (
-            <div class="member-card">
-              {member.username ? (
-                <img
-                  class="member-photo"
-                  src={`https://github.com/${member.username}.png`}
-                  alt={"Foto de " + member.name}
-                />
-              ) : (
-                <div class="default-photo">
-                  <i class="fa-solid fa-user"></i>
-                </div>
-              )}
+    <div class="content-container">
+      <aside class="navbar">
+        <h2>Semestres</h2>
+        <button class="semester-btn">2025-fall</button>
+        <button class="semester-btn">2025-summer</button>
+        <button class="semester-btn">2024-spring</button>
+      </aside>
 
-              <h3 class="member-name">{member.name}</h3>
-              <div class="member-links">
-                <a
-                  class="member-link"
-                  href={member.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-brands fa-github"></i> <!-- Ícono de GitHub -->
-                </a>
-                {member.linkedIn && (
+      <section class="members-section">
+        <div class="members-container">
+          <div class="members-grid">
+            {members.map((member: Member) => (
+              <div class="member-card">
+                {member.username ? (
+                  <img
+                    class="member-photo"
+                    src={`https://github.com/${member.username}.png`}
+                    alt={"Foto de " + member.name}
+                  />
+                ) : (
+                  <div class="default-photo">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                )}
+
+                <h3 class="member-name">{member.name}</h3>
+                <div class="member-links">
                   <a
                     class="member-link"
-                    href={member.linkedIn}
+                    href={member.link}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i class="fa-brands fa-linkedin-in"></i> <!-- Ícono de LinkedIn -->
+                    <i class="fa-brands fa-github"></i> <!-- Ícono de GitHub -->
                   </a>
-                )}
+                  {member.linkedIn && (
+                    <a
+                      class="member-link"
+                      href={member.linkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i class="fa-brands fa-linkedin-in"></i> <!-- Ícono de LinkedIn -->
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </div>
+  </div>
   <Footer />
 </Layout>
 
 <style>
-    main {
-        margin: auto;
+    .main-container {
+        display: flex;
+        flex-direction: column;
         padding: 1rem;
-        max-width: 800px;
+        max-width: 1680px; /* Ajusta según sea necesario */
+        margin: auto;
         color: white;
         font-size: 20px;
         line-height: 1.6;
-        margin-bottom: 3rem; 
+        margin-bottom: 3rem;
     }
 
     h1 {
         font-size: 4rem;
         font-weight: 700;
         text-align: center;
-        margin-bottom: 0;    /* Eliminar espacio extra entre titular y miembros*/
+        margin-bottom: 1rem; /* Espacio entre el título y el navbar */
+        width: 100%; /* Asegura que el título ocupe todo el ancho */
+    }
+
+    .content-container {
+        display: flex;
+        width: 100%;
+    }
+
+    .navbar {
+        width: 200px; /* Ancho fijo para el navbar */
+        background-color: #2d3748;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        height: fit-content;
+        position: sticky; /* Hace que la navbar se quede fija al hacer scroll */
+        top: 1rem; /* Ajusta la posición vertical */
+        left: 0; /* Pegada al margen izquierdo */
+        margin-left: 0; /* Elimina el margen izquierdo */
+    }
+
+    .navbar h2 {
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .semester-btn {
+        padding: 0.5rem 1rem;
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .semester-btn:hover {
+        background-color: #dc2626;
+    }
+
+    .members-section {
+        flex: 1; /* Ocupa todo el espacio restante */
+        display: flex;
+        justify-content: center; /* Centra las tarjetas horizontalmente */
     }
 
     .members-container {
@@ -87,9 +149,9 @@ import type { Member } from '../data/membersData';
 
     .members-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 2rem;
-        max-width: 800px;
+        max-width: 100%;
     }
 
     .member-card {
@@ -127,14 +189,9 @@ import type { Member } from '../data/membersData';
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100px; /* Coincide con el tamaño de las fotos */
-        height: 100px; /* Igual al ancho */
-        border-radius: 50%; /* Hace el contenedor circular */
         background-color: rgba(29, 78, 216, 0.1);
         color: white;
         font-size: 3rem;
-        margin-bottom: 1rem;
-        border: 2px solid rgba(29, 78, 216, 0.1); /* Borde decorativo */
     }
 
     .member-name {
@@ -162,11 +219,11 @@ import type { Member } from '../data/membersData';
         border-color: white;
     }
 
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
 </style>
