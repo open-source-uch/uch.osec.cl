@@ -71,23 +71,40 @@
 
 
 <style>
-    .footer-link {
-    color: white;
+:root {
+    --footer-link-color: white;
+    --footer-link-hover-color: #ffcc00;
+    --footer-link-bg-hover: rgba(255, 255, 255, 0.1);
+}
+
+.footer-link {
+    color: var(--footer-link-color);
     font-size: 1rem;
     text-decoration: none;
     opacity: 0.8;
     padding: 0.3rem 0.5rem;
-    transition: color 0.6s, background-color 0.6s;
-    }
+    border-radius: 0.3rem;
+    transition: color 0.4s ease, background-color 0.4s ease, transform 0.2s ease;
+}
 
-    .footer-link:hover,
-    .footer-link:focus {
-    color: rgb(var(--accent-light));
-    background-image: var(--accent-gradient);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+.footer-link:hover {
+    color: var(--footer-link-hover-color);
+    background-color: var(--footer-link-bg-hover);
     opacity: 1;
-    }
+    transform: scale(1.05);
+}
+
+.footer-link:focus {
+    outline: 2px dashed var(--footer-link-hover-color);
+    outline-offset: 3px;
+}
+
+.footer-link:active {
+    transform: scale(0.98);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
 
     .nav-item:is(:hover, :focus-within) .nav-link {
         opacity: 1;
