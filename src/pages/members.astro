@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+import { members } from '../data/membersData';
+import type { Member } from '../data/membersData'; 
+---
+<Layout title="OSUCH | Miembros">
+  <Navbar />
+  <div class="main-container">
+    <h1>
+      Miembros OS<span class="text-gradient">UCH</span>
+    </h1>
+
+    <div class="content-container">
+      <aside class="navbar">
+        <h2>Semestres</h2>
+        <button class="semester-btn">2025-fall</button>
+        <button class="semester-btn">2025-summer</button>
+        <button class="semester-btn">2024-spring</button>
+      </aside>
+
+      <section class="members-section">
+        <div class="members-container">
+          <div class="members-grid">
+            {members.map((member: Member) => (
+              <div class="member-card">
+                {member.username ? (
+                  <img
+                    class="member-photo"
+                    src={`https://github.com/${member.username}.png`}
+                    alt={"Foto de " + member.name}
+                  />
+                ) : (
+                  <div class="default-photo">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                )}
+
+                <h3 class="member-name">{member.name}</h3>
+                <div class="member-links">
+                  <a
+                    class="member-link"
+                    href={member.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="fa-brands fa-github"></i> <!-- Ícono de GitHub -->
+                  </a>
+                  {member.linkedIn && (
+                    <a
+                      class="member-link"
+                      href={member.linkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i class="fa-brands fa-linkedin-in"></i> <!-- Ícono de LinkedIn -->
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        max-width: 1680px; /* Ajusta según sea necesario */
+        margin: auto;
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+    }
+
+    h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem; /* Espacio entre el título y el navbar */
+        width: 100%; /* Asegura que el título ocupe todo el ancho */
+    }
+
+    .content-container {
+        display: flex;
+        width: 100%;
+    }
+
+    .navbar {
+        width: 200px; /* Ancho fijo para el navbar */
+        background-color: #2d3748;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        height: fit-content;
+        position: sticky; /* Hace que la navbar se quede fija al hacer scroll */
+        top: 1rem; /* Ajusta la posición vertical */
+        left: 0; /* Pegada al margen izquierdo */
+        margin-left: 0; /* Elimina el margen izquierdo */
+    }
+
+    .navbar h2 {
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .semester-btn {
+        padding: 0.5rem 1rem;
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .semester-btn:hover {
+        background-color: #dc2626;
+    }
+
+    .members-section {
+        flex: 1; /* Ocupa todo el espacio restante */
+        display: flex;
+        justify-content: center; /* Centra las tarjetas horizontalmente */
+    }
+
+    .members-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .members-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        max-width: 100%;
+    }
+
+    .member-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgba(29, 78, 216, 0.1);
+        border: 1px solid rgb(223, 65, 64);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        text-align: center;
+        height: 300px;
+        width: 200px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .member-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgb(223, 65, 64);
+    }
+
+    .member-photo,
+    .default-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        object-fit: cover;
+        border: 2px solid rgba(29, 78, 216, 0.1);
+    }
+
+    .default-photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(29, 78, 216, 0.1);
+        color: white;
+        font-size: 3rem;
+    }
+
+    .member-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: white;
+    }
+
+    .member-links {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .member-link {
+        font-size: 1rem;
+        color: rgb(223, 65, 64);
+        text-decoration: none;
+        border-bottom: 1px dashed rgb(223, 65, 64);
+        transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .member-link:hover {
+        color: white;
+        border-color: white;
+    }
+
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
+</style>
